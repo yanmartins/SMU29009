@@ -1,1 +1,9 @@
 theme: jekyll-theme-cayman
+title: Sistemas Multimídia (2019.1)
+description: >
+  Este é um projeto em desenvolvimento na disciplina de Sistemas Multimídia
+  do Curso de Engenharia de Telecomunicações do IFSC câmpus São José -
+  primeiro semestre de 2019.
+baseurl: '/SMU29009'
+url: 'https://yanmartins.github.io/SMU29009'
+github_username: yanmartins
