@@ -5,7 +5,8 @@ O GamingAnywhere utiliza o protocolo Real Time Streaming Protocol (RTSP) para co
 No console do cliente, pôde-se observar que o primeiro método foi o DESCRIBE; o par DESCRIBE constitui a fase de inicialização de mídia do RTSP. A qual pode ser vista logo abaixo:
 
 - Cliente --> Servidor
-```markdown
+
+```
 Sending request: 
 DESCRIBE rtsp://191.36.13.49:8000/desktop RTSP/1.0
 CSeq: 2
@@ -14,7 +15,8 @@ Accept: application/sdp
 ```
 
 - Servidor --> Cliente
-```markdown
+
+```
 Received a complete DESCRIBE response:
 RTSP/1.0 200 OK   
 CSeq: 2                   
@@ -22,8 +24,7 @@ Date: Tue, Jun 25 2019 13:41:17 GMT
 Content-Base: rtsp://191.36.13.49:8554/desktop/   
 Content-Type: application/sdp              
 Content-Length: 523
-```
-```
+
 v=0                          
 o=- 1561469908423507 1 IN IP4 191.36.13.49
 s=Real-Time Desktop
@@ -50,6 +51,7 @@ a=control:track2
 Em seguida ocorre a requisição SETUP, onde esta especifica o mecanismo de transporte a ser usado para o fluxo de mídia da URI desejada. O cabeçalho Transport informa os parâmetros de transporte aceitáveis para o cliente para transmissão de dados, consequentemente a resposta conterá os parâmetros de transporte selecionados pelo servidor:
 
 - Cliente --> Servidor
+
 ```
 Sending request: 
 SETUP rtsp://191.36.13.49:8554/desktop/track1 RTSP/1.0
@@ -59,6 +61,7 @@ Transport: RTP/AVP;unicast;client_port=65348-65349
 ```
 
 - Servidor --> Cliente
+
 ```
 Received a complete SETUP response:
 RTSP/1.0 200 OK
@@ -73,6 +76,7 @@ A requisição SETUP ocorreu duas vezes nesse experimento, a primeira vez defini
 Posteriormente, a requisição PLAY informa ao servidor para começar a enviar dados através do mecanismo especificado na requisição SETUP.
 
 - Cliente --> Servidor
+
 ```
 Sending request: PLAY rtsp://191.36.13.49:8554/desktop/ RTSP/1.0
 CSeq: 5
@@ -82,6 +86,7 @@ Range: npt=0.000-
 ```
 
 - Servidor --> Cliente
+
 ```
 Received a complete PLAY response:
 RTSP/1.0 200 OK
