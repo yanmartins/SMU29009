@@ -1,3 +1,15 @@
+## O GamingAnywhere
+
+O Gaming Anywhere é uma plataforma opensource que permite implementar um servidor em uma máquina rodando Linux ou Windows, podendo ter cliente nestes mesmos sistemas em diferentes computadores ou dispositivos móveis com suporte ao Android.
+
+## Cenário
+
+O cenário consiste em dois computadores. Onde o computador servidor está operando em Linux Ubuntu, e o cliente em um notebook com Windows 10. Ambos dispositivos estão em uma mesma rede local. Logo abaixo, encontram-se os seus respectivos IPs:
+
+1. Servidor: ```191.36.13.49```
+2. Cliente: ```191.36.13.41```
+
+
 ## RTSP
 
 O GamingAnywhere utiliza o protocolo Real Time Streaming Protocol (RTSP) para controle do transporte de mídia de forma síncrona. De acordo com a RFC 2326, o RTSP é um protocolo da camada de aplicação para controle sobre a entrega de dados com propriedades em tempo real. Este protocolo destina-se a controlar várias sessões de entrega de dados, fornecer um meio para escolher os canais de entrega, como UDP, multicast UDP e TCP, e fornecer um meio para escolher os mecanismos de entrega com base no RTP.
