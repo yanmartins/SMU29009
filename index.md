@@ -1,3 +1,8 @@
+#### Dupla
+Theodor Konrad Wojcikiewicz
+
+Yan Lucas Martins
+
 ## O GamingAnywhere
 
 O Gaming Anywhere é uma plataforma opensource que permite implementar um servidor em uma máquina rodando Linux ou Windows, podendo ter cliente nestes mesmos sistemas em diferentes computadores ou dispositivos móveis com suporte ao Android.
