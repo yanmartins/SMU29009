@@ -14,6 +14,8 @@ O cenário consiste em dois computadores. Onde o computador servidor está opera
 
 O GamingAnywhere utiliza o protocolo Real Time Streaming Protocol (RTSP) para controle do transporte de mídia de forma síncrona. De acordo com a RFC 2326, o RTSP é um protocolo da camada de aplicação para controle sobre a entrega de dados com propriedades em tempo real. Este protocolo destina-se a controlar várias sessões de entrega de dados, fornecer um meio para escolher os canais de entrega, como UDP, multicast UDP e TCP, e fornecer um meio para escolher os mecanismos de entrega com base no RTP.
 
+## Oferta de mídia
+
 No console do cliente, pôde-se observar que o primeiro método foi o DESCRIBE; o par DESCRIBE constitui a fase de inicialização de mídia do RTSP. A qual pode ser vista logo abaixo:
 
 - Cliente --> Servidor
@@ -60,6 +62,8 @@ b=AS:128
 a=control:track2
 ```
 
+## Estabelecimento de sessão de mídia
+
 Em seguida ocorre a requisição SETUP, onde esta especifica o mecanismo de transporte a ser usado para o fluxo de mídia da URI desejada. O cabeçalho Transport informa os parâmetros de transporte aceitáveis para o cliente para transmissão de dados, consequentemente a resposta conterá os parâmetros de transporte selecionados pelo servidor:
 
 - Cliente --> Servidor
@@ -83,7 +87,39 @@ Transport: RTP/AVP;unicast;destination=191.36.13.41;source=191.36.13.49;client_p
 Session: BBA6F613;timeout=65
 ```
 
-A requisição SETUP ocorreu duas vezes nesse experimento, a primeira vez definiu o mecanismo de transporte para o decoder de vídeo (h264) e de áudio (MPA).
+- Cliente - Servidor
+
+```
+Sending request:
+SETUP rtsp://191.36.13.49:8554/desktop/track2 RTSP/1.0CSeq: 4
+User-Agent: RTSP Client (LIVE555 Streaming Media v2014.05.27)
+Transport: RTP/AVP;unicast;client_port=65350-65351
+Session: BBA6F613                                                                                                                       
+```
+
+- Servidor - Cliente
+
+```                                                                                                                                     
+Received a complete SETUP response:
+RTSP/1.0 200 OK
+CSeq: 4
+Date: Tue, Jun 25 2019 13:41:18 GMT
+Transport: RTP/AVP;unicast;destination=191.36.13.41;source=191.36.13.49;client_port=65350-65351;server_port=6972-6973
+Session: BBA6F613;timeout=65 
+```
+
+A requisição SETUP ocorreu duas vezes nesse experimento, a primeira vez definiu o mecanismo de transporte para o decoder de vídeo (h264) e a segunda para o decoder de áudio (MPA).
+
+|      ip      |     port    | codec |
+|:------------:|:-----------:|:-----:|
+| 191.36.13.41 | 65348-65349 |  h264 |
+| 191.36.13.49 | 6970-6971   |  h264 |
+| 191.36.13.41 | 65350-65351 |  MPA  |
+| 191.36.13.49 | 6972-6973   |  MPA  |
+
+Devido ao parâmetro ```unicast``` do cabeçalho ```Transport```, o canal da entrega selecionado na camada de transporte, foi o protocolo UDP.
+
+## Fluxo de mídia
 
 Posteriormente, a requisição PLAY informa ao servidor para começar a enviar dados através do mecanismo especificado na requisição SETUP.
 
