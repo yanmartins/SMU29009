@@ -176,3 +176,4 @@ Durante todo o processos, o valor de *packet loss*, bem como o de *jitter* manti
 ## Referencias
 
 - [GamingAnywhere](http://gaminganywhere.org)
+- [Real-Time Streaming Protocol](https://tools.ietf.org/html/rfc7826)
