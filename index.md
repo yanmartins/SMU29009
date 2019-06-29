@@ -176,7 +176,7 @@ Durante o streaming do jogo, foram capturados alguns dados referentes ao estado 
 # 1561470813.235629 player frame rate: decoder 0 @ 49.9749 fps 
 ```
 
-Durante todo o processos, o valor de *packet loss*, bem como o de *jitter* mantiveram-se estáveis. Raramente apresentando variações bruscas.
+Durante todo o processo, o valor de *packet loss*, bem como o de *jitter* mantiveram-se estáveis. Raramente apresentando variações bruscas.
 
 ## Referencias
 
