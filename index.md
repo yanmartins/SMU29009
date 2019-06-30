@@ -21,7 +21,7 @@ O GamingAnywhere utiliza o protocolo *Real Time Streaming Protocol* (RTSP) para 
 
 ## Oferta de mídia
 
-No console do cliente, pôde-se observar que o primeiro método foi o `DESCRIBE`; o par `DESCRIBE` constitui a fase de inicialização de mídia do RTSP. A qual pode ser vista logo abaixo:
+No console do cliente, pôde-se observar que a primeira requisição foi o [`DESCRIBE`](https://tools.ietf.org/html/rfc2326#page-31); o par `DESCRIBE` constitui a fase de inicialização de mídia do RTSP. A qual pode ser vista logo abaixo:
 
 - Cliente - Servidor
 
@@ -67,9 +67,11 @@ b=AS:128
 a=control:track2
 ```
 
+Nesta requisição, o servidor realizou a oferta de seus mecanismos diante da requisição vinda a partir do cliente. Devido ao fluxo de dois tipos de mídia, a oferta de ambas pode ser vista através da resposta do `DESCRIBE`. Estas, recebem um parâmetro de controle de URL, o `a=control` (*track1* para vídeo e *track2* para audio). O qual será usado posteriormente, na requisição `PLAY`.
+
 ## Estabelecimento de sessão de mídia
 
-Em seguida ocorre a requisição `SETUP`, onde esta especifica o mecanismo de transporte a ser usado para o fluxo de mídia da URI desejada. O cabeçalho `Transport` informa os parâmetros de transporte aceitáveis para o cliente para transmissão de dados, consequentemente a resposta conterá os parâmetros de transporte selecionados pelo servidor:
+Em seguida ocorre a requisição [`SETUP`](https://tools.ietf.org/html/rfc2326#page-33), onde esta, especifica o mecanismo de transporte a ser usado para o fluxo de mídia da URI desejada. O cabeçalho `Transport` informa os parâmetros de transporte aceitáveis para o cliente para transmissão de dados, consequentemente a resposta conterá os parâmetros de transporte selecionados pelo servidor:
 
 - Cliente - Servidor
 
@@ -104,7 +106,7 @@ Session: BBA6F613
 
 - Servidor - Cliente
 
-```                                                                                                                                     
+```                                                                                                                         
 Received a complete SETUP response:
 RTSP/1.0 200 OK
 CSeq: 4
@@ -113,7 +115,7 @@ Transport: RTP/AVP;unicast;destination=191.36.13.41;source=191.36.13.49;client_p
 Session: BBA6F613;timeout=65 
 ```
 
-A requisição `SETUP` ocorreu duas vezes nesse experimento, a primeira vez definiu o mecanismo de transporte para o decoder de vídeo (h264) e a segunda para o decoder de áudio (MPA).
+A requisição `SETUP` ocorreu duas vezes nesse experimento, a primeira vez definiu o mecanismo de transporte para o decoder de vídeo (h264) e a segunda para o decoder de áudio (MPA). A tabela abaixo informa os caminhos selecionados para recebimento e envio de cada tipo de mídia.
 
 |      ip      |     port    | codec |
 |:------------:|:-----------:|:-----:|
@@ -122,11 +124,13 @@ A requisição `SETUP` ocorreu duas vezes nesse experimento, a primeira vez defi
 | 191.36.13.41 | 65350-65351 |  MPA  |
 | 191.36.13.49 | 6972-6973   |  MPA  |
 
-Devido ao parâmetro ```unicast``` do cabeçalho ```Transport```, o canal da entrega selecionado na camada de transporte, foi o protocolo UDP.
+A sintaxe para o especificador de transporte no cabeçalho `Transport` é `transport/profile/lower-transport`. 
+
+Como ofertado na requisição `DESCRIBE`, o protocolo de transporte selecionado para a mídia de áudio e vídeo foi o `RTP` (`transport`). Com o *profile* `AVP` (`profile`). Consequentemente, no caso do `RTP/AVP`, o valor *default* para a `lower-transport` é o protocolo UDP.
 
 ## Iniciando fluxo de mídia
 
-Posteriormente, a requisição ``PLAY`` informa ao servidor para começar a enviar dados através do mecanismo especificado na requisição ``SETUP``.
+Posteriormente, a requisição [``PLAY``](https://tools.ietf.org/html/rfc2326#page-34) informa ao servidor para começar a enviar dados através do mecanismo e caminhos especificados na requisição ``SETUP``.
 
 - Cliente - Servidor
 
@@ -181,4 +185,4 @@ Durante todo o processo, o valor de *packet loss*, bem como o de *jitter* mantiv
 ## Referencias
 
 - [GamingAnywhere](http://gaminganywhere.org)
-- [Real-Time Streaming Protocol](https://tools.ietf.org/html/rfc7826)
+- [Real-Time Streaming Protocol (RTSP)](https://tools.ietf.org/html/rfc2326)
