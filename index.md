@@ -15,7 +15,7 @@ O cenário consiste em dois computadores. Onde o computador servidor está opera
 2. Cliente: ```191.36.13.41```
 
 
-## [RTSP](https://tools.ietf.org/html/rfc7826)
+## [RTSP](https://tools.ietf.org/html/rfc2326)
 
 O GamingAnywhere utiliza o protocolo *Real Time Streaming Protocol* (RTSP) para controle do transporte de mídia de forma síncrona. De acordo com a RFC 2326, o RTSP é um protocolo da camada de aplicação para controle sobre a entrega de dados com propriedades em tempo real. Este protocolo destina-se a controlar várias sessões de entrega de dados, fornecer um meio para escolher os canais de entrega, como UDP, *multicast* UDP e TCP, e fornecer um meio para escolher os mecanismos de entrega com base no RTP.
 
